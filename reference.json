@@ -1,0 +1,57 @@
+{
+    "success": true,
+    "deck_id": "n5qu1dbo2qik",
+    "cards": [
+      {
+        "code": "8D",
+        "image": "https://deckofcardsapi.com/static/img/8D.png",
+        "images": {
+          "svg": "https://deckofcardsapi.com/static/img/8D.svg",
+          "png": "https://deckofcardsapi.com/static/img/8D.png"
+        },
+        "value": "8",
+        "suit": "DIAMONDS"
+      },
+      {
+        "code": "3H",
+        "image": "https://deckofcardsapi.com/static/img/3H.png",
+        "images": {
+          "svg": "https://deckofcardsapi.com/static/img/3H.svg",
+          "png": "https://deckofcardsapi.com/static/img/3H.png"
+        },
+        "value": "3",
+        "suit": "HEARTS"
+      },
+      {
+        "code": "QC",
+        "image": "https://deckofcardsapi.com/static/img/QC.png",
+        "images": {
+          "svg": "https://deckofcardsapi.com/static/img/QC.svg",
+          "png": "https://deckofcardsapi.com/static/img/QC.png"
+        },
+        "value": "QUEEN",
+        "suit": "CLUBS"
+      },
+      {
+        "code": "8C",
+        "image": "https://deckofcardsapi.com/static/img/8C.png",
+        "images": {
+          "svg": "https://deckofcardsapi.com/static/img/8C.svg",
+          "png": "https://deckofcardsapi.com/static/img/8C.png"
+        },
+        "value": "8",
+        "suit": "CLUBS"
+      },
+      {
+        "code": "9H",
+        "image": "https://deckofcardsapi.com/static/img/9H.png",
+        "images": {
+          "svg": "https://deckofcardsapi.com/static/img/9H.svg",
+          "png": "https://deckofcardsapi.com/static/img/9H.png"
+        },
+        "value": "9",
+        "suit": "HEARTS"
+      }
+    ],
+    "remaining": 42
+  }
