@@ -2,12 +2,42 @@
 Author: Yash Shah
 Date: 04/10/2023 
 */
-body {
-    background-image: url(./Poker-Hand-new.png);
+
+/* Code Reference from https://stackoverflow.com/questions/29147806/how-can-i-set-the-image-opacity-for-body-background */
+body::after {
+    content: "";
+    background: url(./Poker-Hand-new.png);
     background-position: center;
+    opacity: 0.55;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+
+#imageDisplayer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    width: auto;
+    font-size: x-large;
+    text-align: center;
 }
 
-h1 {
-    text-align: center;
+#imageDisplayer img{
+    height: 270px;
+    width: 200px;
+    padding-left: 50px;
+    box-shadow: 10px 10px 10px grey;
+    border-radius: 20px;
+}
+
+#imageDisplayer li {
+    display: inline-block;
+    list-style-type:square;
+    margin-left: 80px;
 }
 
