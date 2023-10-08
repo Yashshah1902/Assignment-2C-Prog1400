@@ -229,7 +229,7 @@ let royalFlush = (array) => {
 
     return (
         suits.every(suit => suits[0] === suit) &&
-        cards.every(card => royalCards.includes(card))
+        replacedCards.every(card => royalCards.includes(card))
         );
     }
 
@@ -272,6 +272,47 @@ let straightFlush = (array) => {
 
     return (
         suits.every(suit => suits[0] === suit) &&
-        areConsecutive(cards)
+        areConsecutive(replacedCards)
     )
+}
+
+let fourOfKind = (array) => {
+    let suits = new Array;
+    let cards = new Array;
+    let testValue = new Array;
+
+    // This is only to test the outputs
+    // let cardCodes = cardObject.cards;
+    // console.log();
+
+    for (let i = 0; i < array.length; i++) {
+        let splitted = array[i].split('');
+        testValue.push(splitted);
+    }
+    // console.log(testValue);
+
+    for (let i = 0; i < testValue.length; i++) {
+        cards.push(testValue[i].shift());
+        suits.push(testValue[i].pop());
+    }
+
+    let replacedCards = cards.map((element) => {
+        if (element === "0"){
+            return "10";
+        }
+
+        return element;
+    })
+
+    let counter = [];
+    
+    for (let x = 0; x < replacedCards.length; x++) {
+        let card = replacedCards[i];
+        
+        for (let y = 0; y < replacedCards.length; y++) {
+            const element = replacedCards[y];
+            
+        }
+        
+    }
 }
