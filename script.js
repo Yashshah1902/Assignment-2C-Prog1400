@@ -63,7 +63,7 @@ fetch(deckAPI)
         codesArray = allValues.codes;
 
         addingImages();
-        royalFlush(cardObject);
+        console.log(royalFlush(cardObject));
         });
         
     })
@@ -188,13 +188,13 @@ let addingImages = () => {
 //     return cloneValue;
 // };
 
-// Royal Flush derivation
+// Royal Flush declaration
 
 let royalFlush = (object) => {
 
     let royalCards = ["A", "K", "Q", "J", "0"];
     let suits = new Array;
-    let card = new Array;
+    let cards = new Array;
     let testValue = new Array;
 
     // This is only to test the outputs
@@ -207,10 +207,14 @@ let royalFlush = (object) => {
     console.log(testValue);
 
     for (let i = 0; i < testValue.length; i++) {
-        card.push(testValue[i].shift());
+        cards.push(testValue[i].shift());
         suits.push(testValue[i].pop());
     }
-    console.log(card);
+    console.log(cards);
     console.log(suits);
-    
-};
+
+    return (
+        suits.every(suit => suits[0] === suit) &&
+        cards.every(card => royalCards.includes(card))
+        );
+    }
