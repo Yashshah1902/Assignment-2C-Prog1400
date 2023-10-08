@@ -62,8 +62,10 @@ fetch(deckAPI)
         suitsArray = allValues.suits;
         codesArray = allValues.codes;
 
+        // console.log(codesArray);
+
         addingImages();
-        console.log(royalFlush(cardObject));
+        console.log(royalFlush(codesArray));
         console.log(straightFlush(cardObject));
         });
         
@@ -191,9 +193,9 @@ let addingImages = () => {
 
 // Royal Flush declaration
 
-let royalFlush = (object) => {
+let royalFlush = (array) => {
 
-    let royalCards = ["A", "K", "Q", "J", "0"];
+    let royalCards = ["A", "K", "Q", "J", "10"];
     let suits = new Array;
     let cards = new Array;
     let testValue = new Array;
@@ -202,8 +204,9 @@ let royalFlush = (object) => {
     // let cardCodes = cardObject.cards;
     // console.log();
 
-    for (let i = 0; i < (object.cards).length; i++) {
-        testValue.push(object.cards[i].code.split(''));
+    for (let i = 0; i < array.length; i++) {
+        let splitted = array[i].split('');
+        testValue.push(splitted);
     }
     // console.log(testValue);
 
@@ -211,6 +214,16 @@ let royalFlush = (object) => {
         cards.push(testValue[i].shift());
         suits.push(testValue[i].pop());
     }
+
+    let replacedCards = cards.map((element) => {
+        if (element === "0"){
+            return "10";
+        }
+
+        return element;
+    })
+
+    // console.log(replacedCards)
     // console.log(cards);
     // console.log(suits);
 
@@ -220,7 +233,7 @@ let royalFlush = (object) => {
         );
     }
 
-let straightFlush = (object) => {
+let straightFlush = (array) => {
     let suits = new Array;
     let cards = new Array;
     let testValue = new Array;
@@ -229,8 +242,9 @@ let straightFlush = (object) => {
     // let cardCodes = cardObject.cards;
     // console.log();
 
-    for (let i = 0; i < (object.cards).length; i++) {
-        testValue.push(object.cards[i].code.split(''));
+    for (let i = 0; i < array.length; i++) {
+        let splitted = array[i].split('');
+        testValue.push(splitted);
     }
     // console.log(testValue);
 
@@ -238,8 +252,14 @@ let straightFlush = (object) => {
         cards.push(testValue[i].shift());
         suits.push(testValue[i].pop());
     }
-    // console.log(cards);
-    // console.log(suits);
+
+    let replacedCards = cards.map((element) => {
+        if (element === "0"){
+            return "10";
+        }
+
+        return element;
+    })
 
     function areConsecutive(array) {
         for (let i = 0; i < array.length - 1; i++) {
