@@ -36,6 +36,7 @@ const deckAPI = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
 let deckObject;
 let receivedDeckID;
 let cardObject;
+let cards;
 let valuesArray;
 let imagesPngArray;
 let suitsArray;
@@ -62,7 +63,7 @@ fetch(deckAPI)
         codesArray = allValues.codes;
 
         addingImages();
-        highestPokerHand();
+        royalFlush(cardObject);
         });
         
     })
@@ -125,12 +126,12 @@ let addingImages = () => {
 
 };
 
-let highestPokerHand = () => {
+// let highestPokerHand = () => {
     // let suitSearch;
     // let suitcheckVal = suitsArray[0];
     // let checkingCount = 0;
 
-    // // "HEARTS" "CLUBS" "DIAMONDS" "SPADES"
+    // "HEARTS" "CLUBS" "DIAMONDS" "SPADES"
     // for (let index = 0; index < suitsArray.length; index++) {
 
     //     if (suitsArray[index] === suitcheckVal) {
@@ -159,30 +160,57 @@ let highestPokerHand = () => {
 
     // return result;
 
-    let cloneValue = valuesArray.splice(0);
-    console.log(cloneValue);
+//     let cloneValue = valuesArray.splice(0);
+//     console.log(cloneValue);
     // Replace, "ACE", "KING", "QUEEN", "JACK"  with ints
-    let replacedArray = cloneValue.map(element => {
-        switch (element) {
-            case "ACE":
-                return 14; // or 1, depending on your needs
-            case "KING":
-                return 13;
-            case "QUEEN":
-                return 12;
-            case "JACK":
-                return 11;
-            default:
-                // If it's not one of the specified values, leave it unchanged
-                return parseInt(element);
-        }
-    });
+//     let replacedArray = cloneValue.map(element => {
+//         switch (element) {
+//             case "ACE":
+//                 return 14; // or 1, depending on your needs
+//             case "KING":
+//                 return 13;
+//             case "QUEEN":
+//                 return 12;
+//             case "JACK":
+//                 return 11;
+//             default:
+    // If it's not one of the specified values, leave it unchanged
+//                 return parseInt(element);
+//         }
+//     });
 
-    let highestInt = replacedArray[0];
+//     let highestInt = replacedArray[0];
 
     
     
-    console.log(replacedArray);
+//     console.log(replacedArray);
     
-    return cloneValue;
+//     return cloneValue;
+// };
+
+// Royal Flush derivation
+
+let royalFlush = (object) => {
+
+    let royalCards = ["A", "K", "Q", "J", "0"];
+    let suits = new Array;
+    let card = new Array;
+    let testValue = new Array;
+
+    // This is only to test the outputs
+    // let cardCodes = cardObject.cards;
+    // console.log();
+
+    for (let i = 0; i < (object.cards).length; i++) {
+        testValue.push(object.cards[i].code.split(''));
+    }
+    console.log(testValue);
+
+    for (let i = 0; i < testValue.length; i++) {
+        card.push(testValue[i].shift());
+        suits.push(testValue[i].pop());
+    }
+    console.log(card);
+    console.log(suits);
+    
 };
