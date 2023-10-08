@@ -56,7 +56,8 @@ let royalFlush = (array) => {
         // console.log();
     
         for (let i = 0; i < array.length; i++) {
-            testValue.push(array[i].split(''));
+            let splitted = array[i].split('');
+            testValue.push(splitted);
         }
         // console.log(testValue);
     
@@ -64,8 +65,14 @@ let royalFlush = (array) => {
             cards.push(testValue[i].shift());
             suits.push(testValue[i].pop());
         }
-        // console.log(cards);
-        // console.log(suits);
+    
+        let replacedCards = cards.map((element) => {
+            if (element === "0"){
+                return "10";
+            }
+    
+            return element;
+        })
     
         function areConsecutive(array) {
             for (let i = 0; i < array.length - 1; i++) {

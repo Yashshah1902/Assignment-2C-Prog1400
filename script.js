@@ -66,7 +66,7 @@ fetch(deckAPI)
 
         addingImages();
         console.log(royalFlush(codesArray));
-        console.log(straightFlush(cardObject));
+        console.log(straightFlush(codesArray));
         });
         
     })
@@ -273,5 +273,5 @@ let straightFlush = (array) => {
     return (
         suits.every(suit => suits[0] === suit) &&
         areConsecutive(cards)
-    );
+    )
 }
