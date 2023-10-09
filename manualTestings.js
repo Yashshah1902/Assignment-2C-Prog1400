@@ -551,7 +551,7 @@ let highCard = (array) => {
     }
 
     console.log(highestNumber);
-    return "Your highest hand is high Card";
+    return highestNumber;
 }
 
 console.log(highCard(threeOfKindc))
