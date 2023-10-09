@@ -68,9 +68,11 @@ fetch(deckAPI)
         console.log(royalFlush(codesArray));
         console.log(isStraightFlush(codesArray));
         console.log(fourOfKind(codesArray));
-        console.log(fullhouse(codesArray));
+        console.log(fullHouse(codesArray));
         console.log(flush(codesArray));
         console.log(straight(codesArray));
+        console.log(threeOfKind(codesArray));
+        console.log(twoPair(codesArray));
         });
         
     })
@@ -331,7 +333,7 @@ let fourOfKind = (array) => {
 }
 
 // Full House
-let fullhouse = (array) => {
+let fullHouse = (array) => {
     let suits = [];
     let ranks = []
 
@@ -403,6 +405,7 @@ let flush = (array) => {
     return (suits.every(element => element === suits[0]));
 }
 
+// 6. Straight: Five cards in a sequence, but not of the same suit.
 let straight = (array) => {
     let suits = [];
     let ranks = []
@@ -435,4 +438,104 @@ let straight = (array) => {
         }
     }
     return true; // It's a straight flush
+}
+
+// 7. Three of a kind: Three cards of the same rank.
+let threeOfKind = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    let count = [];
+    let checkingArray = ranks;
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
+        }
+        count.push(currentCount); // Push the count for the current element
+    }
+
+    if (count.includes(3) === true && count.includes(2) === false){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+// 8. Two pair: Two different pairs.
+let twoPair = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    let count = [];
+    let checkingArray = ranks;
+    console.log(checkingArray);
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
+        }
+        count.push(currentCount); // Push the count for the current element
+    }
+    console.log(count);
+
+    let counterCheck = count.filter(value => value === 2);
+    console.log(counterCheck);
+
+    if(counterCheck.length === 4){
+        return true
+    } else {
+        return false;
+    }
+
+    // return count.filter(value => value === 2).length === 4; // checking if the value of count.filter.length = 4
 }
