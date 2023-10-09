@@ -544,14 +544,34 @@ let highCard = (array) => {
     console.log(ranks);
 
     let highestNumber = ranks[0];
+    let highestSuits = suits[0];
     for (let x = 0; x < ranks.length; x++) {
         if(ranks[x] > highestNumber){
-            highestNumber = ranks[x]
+            highestNumber = ranks[x];
+            highestSuits = suits[x];
         }
     }
 
     console.log(highestNumber);
-    return highestNumber;
-}
+    if(highestNumber == 14){
+        return "Ace";
+    } else if (highestNumber == 13){
+        return "King";
+    } else if (highestNumber == 12){
+        return "Queen";
+    } else if (highestNumber == 11){
+        return "Jack";
+    }
 
-console.log(highCard(threeOfKindc))
+    if (highestSuits == "S"){
+        highestSuits = "Spades";
+    } else if (highestSuits == "D"){
+        highestSuits = "Daimonds";
+    } else if (highestSuits == "C"){
+        highestSuits = "Clubs";
+    } else if (highestSuits == "H"){
+        highestSuits = 'Hearts';
+    }
+    return (highestNumber+' of '+highestSuits.toUpperCase());
+}
+console.log(highCard(threeOfKindc));

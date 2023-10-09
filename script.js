@@ -21,7 +21,8 @@ document.body.appendChild(mainDiv);
 
 /* Need to work one's finish Code */
 let mainDivSelc = document.getElementById('mainDiv');
-mainDivSelc.innerHTML += `<button id="draw"> Draw cards! </button>`;
+mainDivSelc.innerHTML = `<b> Draw your Card: </b>`
+mainDivSelc.innerHTML += `<button id="draw"> <b> Draw cards! </b> </button>`;
 
 let firstDiv = document.createElement('div'); // Creating div
 firstDiv.setAttribute("id", "imageDisplayer"); // Selected first image displayer for test, given id - #imageDisplayer
@@ -73,15 +74,15 @@ button.addEventListener("click", () => {// fetching api's
             // console.log(codesArray);
     
             addingImages();
-            console.log(royalFlush(codesArray));
-            console.log(isStraightFlush(codesArray));
-            console.log(fourOfKind(codesArray));
-            console.log(fullHouse(codesArray));
-            console.log(flush(codesArray));
-            console.log(straight(codesArray));
-            console.log(threeOfKind(codesArray));
-            console.log(twoPair(codesArray));
-            console.log(pair(codesArray));
+            // console.log(royalFlush(codesArray));
+            // console.log(isStraightFlush(codesArray));
+            // console.log(fourOfKind(codesArray));
+            // console.log(fullHouse(codesArray));
+            // console.log(flush(codesArray));
+            // console.log(straight(codesArray));
+            // console.log(threeOfKind(codesArray));
+            // console.log(twoPair(codesArray));
+            // console.log(pair(codesArray));
 
             console.log(getHighestHand(codesArray));
             });
@@ -128,7 +129,9 @@ button.addEventListener("click", () => {// fetching api's
     let addingImages = () => {
         // Printing image on div
         // firstDivImage.innerHTML = `<img src="${imagesPngArray[0]}" alt="Card One"> <br> ${valuesArray[0]} of ${suitsArray[0]}`;
-    
+        
+        firstDivImage.innerHTML = "<h2>Images of the Shuffled Cards</h2>"; // For clearing the past div
+
         for (let x = 0; x < valuesArray.length; x++) {
             firstDivImage.innerHTML += `<img src="${imagesPngArray[x]}" alt="Card One">`;
         }
@@ -615,51 +618,72 @@ let highCard = (array) => {
         suits.push(suit);
     }
 
-    console.log(suits);
-    console.log(ranks);
-
     let highestNumber = ranks[0];
+    let highestSuits = suits[0];
     for (let x = 0; x < ranks.length; x++) {
         if(ranks[x] > highestNumber){
-            highestNumber = ranks[x]
+            highestNumber = ranks[x];
+            highestSuits = suits[x];
         }
     }
 
-    // console.log(highestNumber);
-    if(highestNumber = 14){
-        return "Ace";
-    } else if (highestNumber = 13){
-        return "King";
-    } else if (highestNumber = 12){
-        return "Queen";
-    } else if (highestNumber = 11){
-        return "Jack";
+    if(highestNumber == 14){
+        highestNumber = "Ace";
+    } else if (highestNumber == 13){
+        highestNumber = "King";
+    } else if (highestNumber == 12){
+        highestNumber = "Queen";
+    } else if (highestNumber == 11){
+        highestNumber = "Jack";
     }
-    return highestNumber;
+
+    if (highestSuits == "S"){
+        highestSuits = "Spades";
+    } else if (highestSuits == "D"){
+        highestSuits = "Daimonds";
+    } else if (highestSuits == "C"){
+        highestSuits = "Clubs";
+    } else if (highestSuits == "H"){
+        highestSuits = 'Hearts';
+    }
+
+    let result = `${highestNumber.toUpperCase()} of ${highestSuits.toUpperCase()}`;
+    return result;
 }
 
     // return "Your highest Hand is Royal Flush";
     let getHighestHand = (array) => {
         if(royalFlush(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Royal Flush";
+            return "Your highest Hand is Royal Flush";
         } else if(isStraightFlush(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Straight Flush";
+            return "Your highest Hand is Straight Flush";
         } else if(fourOfKind(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Four of Kind";
+            return "Your highest Hand is Four of Kind";
         } else if(fullHouse(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Full House";
+            return "Your highest Hand is Full House";
         } else if(flush(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Flush";
+            return "Your highest Hand is Flush";
         } else if(straight(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Straight";
+            return "Your highest Hand is Straight";
         } else if(threeOfKind(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Three of Kind";
+            return "Your highest Hand is Three of Kind";
         } else if(twoPair(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Two Pair";
+            return "Your highest Hand is Two Pair";
         } else if(pair(array) === true){
             answerDiv.innerHTML = "Your highest Hand is Pair";
+            return "Your highest Hand is Pair";
         } else {
             answerDiv.innerHTML = `Your highest Hand is High Card: Your highest Card is ${highCard(array)}`;
+            return `Your highest Hand is High Card: Your highest Card is ${highCard(array)}`;
+            
         }
     }
 

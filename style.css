@@ -41,3 +41,23 @@ body::after {
     margin-left: 80px;
 }
 
+#draw {
+    margin-left: 20px;
+    height: 40px;
+    border: 1px 1px solid;
+}
+
+#mainDiv b {
+    font-size: x-large;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#answerDiv {
+    background: bisque;
+    margin-left: 500px;
+    margin-right: 500px;
+    font-size: xx-large;
+    text-align: center;
+    text-shadow: 1px 1px yellow;
+}
+
