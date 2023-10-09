@@ -67,6 +67,7 @@ fetch(deckAPI)
         addingImages();
         console.log(royalFlush(codesArray));
         console.log(straightFlush(codesArray));
+        console.log(fourOfKind(codesArray));
         });
         
     })
@@ -257,9 +258,6 @@ let isStraightFlush = (array) => {
         suits.push(suit);
     }
 
-    console.log(suits);
-    console.log(ranks);
-
     let sortedranks = ranks.sort();
     console.log(sortedranks);
 
@@ -283,44 +281,49 @@ let isStraightFlush = (array) => {
     return false; // Not enough cards of the same suit for a flush
 }
 
-
+// Four of Kind
 let fourOfKind = (array) => {
-    let suits = new Array;
-    let cards = new Array;
-    let testValue = new Array;
+    let suits = [];
+    let ranks = []
 
-    // This is only to test the outputs
-    // let cardCodes = cardObject.cards;
-    // console.log();
+    for (let card of array) {
+        let rank = card.slice(0, -1);
+        let suit = card.slice(-1);
 
-    for (let i = 0; i < array.length; i++) {
-        let splitted = array[i].split('');
-        testValue.push(splitted);
-    }
-    // console.log(testValue);
-
-    for (let i = 0; i < testValue.length; i++) {
-        cards.push(testValue[i].shift());
-        suits.push(testValue[i].pop());
-    }
-
-    let replacedCards = cards.map((element) => {
-        if (element === "0"){
-            return "10";
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
         }
 
-        return element;
-    })
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
 
-    let counter = [];
-    
-    for (let x = 0; x < replacedCards.length; x++) {
-        let card = replacedCards[i];
-        
-        for (let y = 0; y < replacedCards.length; y++) {
-            const element = replacedCards[y];
-            
+    let count = [];
+    let checkingArray = ranks;
+    console.log(checkingArray);
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
         }
-        
+        count.push(currentCount); // Push the count for the current element
+    }
+    console.log(count)
+
+    if (count.includes(4) === true){
+        return true;
+    }else{
+        return false;
     }
 }
