@@ -1,6 +1,7 @@
 // Manual Testing
 
 // Royal Flush
+let threeOfKindc = ["2D", "2S", "2H", "4C", "4D"]
 let fourCons = ["2D", "2S", "2H", "2C", "KD"]
 let randomArray = ["2D", "4S", "JH", "QC", "KD"]
 let codesArray = ['AS', 'KS', 'QS', 'JS', '0S'];
@@ -53,15 +54,15 @@ let royalFlush = (array) => {
     //     let cards = new Array;
     //     let testValue = new Array;
     
-    //     // This is only to test the outputs
-    //     // let cardCodes = cardObject.cards;
-    //     // console.log();
+    // This is only to test the outputs
+    // let cardCodes = cardObject.cards;
+    // console.log();
     
     //     for (let i = 0; i < array.length; i++) {
     //         let splitted = array[i].split('');
     //         testValue.push(splitted);
     //     }
-    //     // console.log(testValue);
+        // console.log(testValue);
     
     //     for (let i = 0; i < testValue.length; i++) {
     //         cards.push(testValue[i].shift());
@@ -217,3 +218,54 @@ let fourOfKind = (array) => {
 
 console.log(fourOfKind(codesArray));
 console.log(fourOfKind(fourCons));
+
+let threeOfKind = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    let count = [];
+    let checkingArray = ranks;
+    console.log(checkingArray);
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
+        }
+        count.push(currentCount); // Push the count for the current element
+    }
+    console.log(count)
+
+    if (count.includes(3) === true && count.includes(2) === true){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+console.log(threeOfKind(threeOfKindc));

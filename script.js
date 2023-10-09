@@ -66,7 +66,7 @@ fetch(deckAPI)
 
         addingImages();
         console.log(royalFlush(codesArray));
-        console.log(straightFlush(codesArray));
+        console.log(isStraightFlush(codesArray));
         console.log(fourOfKind(codesArray));
         });
         
@@ -259,7 +259,7 @@ let isStraightFlush = (array) => {
     }
 
     let sortedranks = ranks.sort();
-    console.log(sortedranks);
+    // console.log(sortedranks);
 
     let count = 0;
 
@@ -308,7 +308,7 @@ let fourOfKind = (array) => {
 
     let count = [];
     let checkingArray = ranks;
-    console.log(checkingArray);
+    // console.log(checkingArray);
 
     for (let i = 0; i < checkingArray.length; i++) {
         let currentCount = 0; // Initialize the count for the current element
@@ -322,6 +322,55 @@ let fourOfKind = (array) => {
     console.log(count)
 
     if (count.includes(4) === true){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+let threeOfKind = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    let count = [];
+    let checkingArray = ranks;
+    console.log(checkingArray);
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
+        }
+        count.push(currentCount); // Push the count for the current element
+    }
+    console.log(count)
+
+    if (count.includes(3) === true && count.includes(2) === true){
         return true;
     }else{
         return false;
