@@ -535,6 +535,7 @@ let twoPair = (array) => {
     // return count.filter(value => value === 2).length === 4; // checking if the value of count.filter.length = 4
 }
 
+// 9. Pair: Two cards of the same rank.
 let pair = (array) => {
     let suits = [];
     let ranks = []

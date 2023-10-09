@@ -43,10 +43,9 @@ let royalFlush = (array) => {
     // console.log(cards);
     // console.log(suits);
 
-    return (
-        suits.every(suit => suits[0] === suit) &&
-        replacedCards.every(card => royalCards.includes(card))
-        );
+    if (suits.every(suit => suits[0] === suit) === true && replacedCards.every(card => royalCards.includes(card) === true)){
+        return "Your Highest hand is Royal Flush";
+    }
     }
 
     console.log(royalFlush(codesArray));
@@ -158,11 +157,10 @@ let royalFlush = (array) => {
                     return false; // Not a straight flush
                 }
             }
-            return true; // It's a straight flush
+            return "Your highest hand is Straight Flush"; // It's a straight flush
         }
-    
-        return false; // Not enough cards of the same suit for a flush
 
+        return false;
         
     }
 
@@ -214,9 +212,7 @@ let fourOfKind = (array) => {
     console.log(count)
 
     if (count.includes(4) === true){
-        return true;
-    }else{
-        return false;
+        return "Your highest hand is Four of a Kind";
     }
 }
 
@@ -266,9 +262,7 @@ let fullHouse = (array) => {
     console.log(count)
 
     if (count.includes(3) === true && count.includes(2) === true){
-        return true;
-    }else{
-        return false;
+        return "Your highest hand is Full House";
     }
 }
 
@@ -303,7 +297,9 @@ let flush = (array) => {
     console.log(suits);
     console.log(ranks);
 
-    return (suits.every(element => element === suits[0]));
+    if (suits.every(element => element === suits[0]) === true){
+        return "Your highest hand is Flush";
+    }
 }
 
 console.log(flush(flushc));
@@ -345,7 +341,7 @@ let straight = (array) => {
             return false; // Not a straight flush
         }
     }
-    return true; // It's a straight flush
+    return "Your highest hand is Straight"; // It's a straight flush
 }
 
 console.log(straight(codesArray));
@@ -394,7 +390,7 @@ let threeOfKind = (array) => {
     }
 
     if (count.includes(3) === true && count.includes(2) === false){
-        return true;
+        return "Your highest hand is Three of a Kind.";;
     }else{
         return false;
     }
@@ -449,7 +445,7 @@ let twoPair = (array) => {
     console.log(counterCheck);
 
     if(counterCheck.length === 4){
-        return true
+        return "Your highest hand is Two Pair";
     } else {
         return false;
     }
@@ -508,7 +504,7 @@ let pair = (array) => {
     console.log(counterCheck);
 
     if(counterCheck.length === 2){
-        return true
+        return "Your highest hand is Pair";
     } else {
         return false;
     }
@@ -518,3 +514,44 @@ let pair = (array) => {
 
 console.log(pair(twoPairc));
 console.log(pair(pairc));
+
+// 10. High Card: When you haven't made any of the hands above, the highest card plays. In the example below, the jack plays as the highest card.
+let highCard = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    let highestNumber = ranks[0];
+    for (let x = 0; x < ranks.length; x++) {
+        if(ranks[x] > highestNumber){
+            highestNumber = ranks[x]
+        }
+    }
+
+    console.log(highestNumber);
+    return "Your highest hand is high Card";
+}
+
+console.log(highCard(threeOfKindc))
