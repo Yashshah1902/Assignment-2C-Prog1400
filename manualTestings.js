@@ -1,6 +1,7 @@
 // Manual Testing
 
 // Royal Flush
+let pairc = ["2D", "2S", "5H", "7C", "0D"];
 let twoPairc = ["2D", "2S", "5H", "4C", "4D"];
 let flushc = ["5S", "2S", "6S", "0S", "KS"];
 let fullHousec = ["2D", "2S", "2H", "4C", "4D"];
@@ -459,3 +460,61 @@ let twoPair = (array) => {
 console.log(twoPair(threeOfKindc));
 console.log(twoPair(fullHousec));
 console.log(twoPair(twoPairc));
+
+// 9. Pair: Two cards of the same rank.
+let pair = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    let count = [];
+    let checkingArray = ranks;
+    console.log(checkingArray);
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
+        }
+        count.push(currentCount); // Push the count for the current element
+    }
+    console.log(count);
+
+    let counterCheck = count.filter(value => value === 2);
+    console.log(counterCheck);
+
+    if(counterCheck.length === 2){
+        return true
+    } else {
+        return false;
+    }
+
+    // return count.filter(value => value === 2).length === 4; // checking if the value of count.filter.length = 4
+}
+
+console.log(pair(twoPairc));
+console.log(pair(pairc));

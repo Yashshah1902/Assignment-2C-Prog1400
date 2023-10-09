@@ -73,6 +73,7 @@ fetch(deckAPI)
         console.log(straight(codesArray));
         console.log(threeOfKind(codesArray));
         console.log(twoPair(codesArray));
+        console.log(pair(codesArray));
         });
         
     })
@@ -510,12 +511,8 @@ let twoPair = (array) => {
         suits.push(suit);
     }
 
-    console.log(suits);
-    console.log(ranks);
-
     let count = [];
     let checkingArray = ranks;
-    console.log(checkingArray);
 
     for (let i = 0; i < checkingArray.length; i++) {
         let currentCount = 0; // Initialize the count for the current element
@@ -526,12 +523,58 @@ let twoPair = (array) => {
         }
         count.push(currentCount); // Push the count for the current element
     }
-    console.log(count);
 
     let counterCheck = count.filter(value => value === 2);
-    console.log(counterCheck);
 
     if(counterCheck.length === 4){
+        return true
+    } else {
+        return false;
+    }
+
+    // return count.filter(value => value === 2).length === 4; // checking if the value of count.filter.length = 4
+}
+
+let pair = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    let count = [];
+    let checkingArray = ranks;
+
+    for (let i = 0; i < checkingArray.length; i++) {
+        let currentCount = 0; // Initialize the count for the current element
+        for (let j = 0; j < checkingArray.length; j++) {
+            if (checkingArray[i] === checkingArray[j]) {
+                currentCount++;
+            }
+        }
+        count.push(currentCount); // Push the count for the current element
+    }
+
+    let counterCheck = count.filter(value => value === 2);
+
+    if(counterCheck.length === 2){
         return true
     } else {
         return false;
