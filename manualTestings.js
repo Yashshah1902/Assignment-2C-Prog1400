@@ -1,6 +1,7 @@
 // Manual Testing
 
 // Royal Flush
+let flushc = ["5S", "2S", "6S", "0S", "KS"]
 let threeOfKindc = ["2D", "2S", "2H", "4C", "4D"]
 let fourCons = ["2D", "2S", "2H", "2C", "KD"]
 let randomArray = ["2D", "4S", "JH", "QC", "KD"]
@@ -269,3 +270,80 @@ let threeOfKind = (array) => {
 }
 
 console.log(threeOfKind(threeOfKindc));
+
+// 5. Flush: Any five cards of the same suit, but not in a sequence.
+
+let flush = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    return (suits.every(element => element === suits[0]));
+}
+
+console.log(flush(flushc));
+console.log(flush(threeOfKindc));
+
+// 6. Straight: Five cards in a sequence, but not of the same suit.
+let straight = (array) => {
+    let suits = [];
+    let ranks = []
+
+    for (let card of array) {
+        let rank = card.slice(0, -1)
+        let suit = card.slice(-1);
+
+        if (rank === "0") {
+            rank = "10";
+        } else if (rank === "A") {
+            rank = "14";
+        } else if (rank === "K") {
+            rank = "13";
+        } else if (rank === "Q") {
+            rank = "12";
+        } else if (rank === "J") {
+            rank = "11";
+        }
+
+        ranks.push(parseInt(rank));
+        suits.push(suit);
+    }
+
+    console.log(suits);
+    console.log(ranks);
+
+    let sortedranks = ranks.sort();
+    console.log(sortedranks);
+
+    for (let i = 0; i < sortedranks.length - 1; i++) {
+        if (sortedranks[i] + 1 !== sortedranks[i + 1]) {
+            return false; // Not a straight flush
+        }
+    }
+    return true; // It's a straight flush
+}
+
+console.log(straight(codesArray));
+console.log(straight(threeOfKindc));
