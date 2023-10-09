@@ -146,7 +146,7 @@ let royalFlush = (array) => {
             }
         }
 
-        if (count === 5){
+        if (count === suits.length){
             for (let i = 0; i < sortedranks.length - 1; i++) {
                 if (sortedranks[i] + 1 !== sortedranks[i + 1]) {
                     return false; // Not a straight flush
