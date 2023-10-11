@@ -23,6 +23,7 @@ document.body.appendChild(mainDiv);
 let mainDivSelc = document.getElementById('mainDiv');
 mainDivSelc.innerHTML = `<b> Draw your Card: </b>`
 mainDivSelc.innerHTML += `<button id="draw"> <b> Draw cards! </b> </button>`;
+mainDivSelc.innerHTML += `<h2>Images of the Shuffled Cards</h2>`
 
 let firstDiv = document.createElement('div'); // Creating div
 firstDiv.setAttribute("id", "imageDisplayer"); // Selected first image displayer for test, given id - #imageDisplayer
@@ -34,7 +35,6 @@ mainDiv.appendChild(answerDiv);
 
 let firstDivImage = document.getElementById('imageDisplayer');
 // firstDivImage.innerHTML = `<img src="${imagesPngArray[0]} alt="Card One">`;
-firstDivImage.innerHTML = "<h2>Images of the Shuffled Cards</h2>";
 
 let button = document.getElementById('draw');
 button.addEventListener("click", () => {// fetching api's
@@ -58,7 +58,22 @@ button.addEventListener("click", () => {// fetching api's
             receivedDeckID = deckId(deckObject);
             console.log(receivedDeckID);
     
-            let cardsAPI = `https://deckofcardsapi.com/api/deck/${receivedDeckID}/draw/?count=5`;
+            let cardsAPI = `https://prog2700.onrender.com/pokerhandtest/straight`;
+            //https://deckofcardsapi.com/api/deck/${receivedDeckID}/draw/?count=5
+
+            /*
+            https://prog2700.onrender.com/pokerhandtest/royalflush
+            https://prog2700.onrender.com/pokerhandtest/straightflush
+            https://prog2700.onrender.com/pokerhandtest/fourofakind
+            https://prog2700.onrender.com/pokerhandtest/fullhouse
+            https://prog2700.onrender.com/pokerhandtest/flush
+            https://prog2700.onrender.com/pokerhandtest/straight
+            https://prog2700.onrender.com/pokerhandtest/threeofakind
+            https://prog2700.onrender.com/pokerhandtest/twopair
+            https://prog2700.onrender.com/pokerhandtest/onepair
+            https://prog2700.onrender.com/pokerhandtest/highcard
+            https://prog2700.onrender.com/pokerhandtest/random
+            */
     
             fetch(cardsAPI)
             
@@ -79,7 +94,7 @@ button.addEventListener("click", () => {// fetching api's
             // console.log(fourOfKind(codesArray));
             // console.log(fullHouse(codesArray));
             // console.log(flush(codesArray));
-            // console.log(straight(codesArray));
+            console.log(straight(codesArray));
             // console.log(threeOfKind(codesArray));
             // console.log(twoPair(codesArray));
             // console.log(pair(codesArray));
@@ -130,7 +145,7 @@ button.addEventListener("click", () => {// fetching api's
         // Printing image on div
         // firstDivImage.innerHTML = `<img src="${imagesPngArray[0]}" alt="Card One"> <br> ${valuesArray[0]} of ${suitsArray[0]}`;
         
-        firstDivImage.innerHTML = "<h2>Images of the Shuffled Cards</h2>"; // For clearing the past div
+        firstDivImage.innerHTML = ""; // For clearing the past div
 
         for (let x = 0; x < valuesArray.length; x++) {
             firstDivImage.innerHTML += `<img src="${imagesPngArray[x]}" alt="Card One">`;
@@ -251,10 +266,10 @@ button.addEventListener("click", () => {// fetching api's
     
     let isStraightFlush = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
@@ -299,7 +314,7 @@ button.addEventListener("click", () => {// fetching api's
     // Four of Kind
     let fourOfKind = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
             let rank = card.slice(0, -1);
@@ -345,10 +360,10 @@ button.addEventListener("click", () => {// fetching api's
     // Full House
     let fullHouse = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
@@ -390,10 +405,10 @@ button.addEventListener("click", () => {// fetching api's
     // 5. Flush: Any five cards of the same suit, but not in a sequence.
     let flush = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
@@ -418,16 +433,16 @@ button.addEventListener("click", () => {// fetching api's
     // 6. Straight: Five cards in a sequence, but not of the same suit.
     let straight = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
                 rank = "10";
             } else if (rank === "A") {
-                rank = "14";
+                rank = "1";
             } else if (rank === "K") {
                 rank = "13";
             } else if (rank === "Q") {
@@ -440,11 +455,22 @@ button.addEventListener("click", () => {// fetching api's
             suits.push(suit);
         }
     
-        let sortedranks = ranks.sort();
+        // console.log(ranks);
+        
+        // A different condition if the Straight is Ace, King, Queen, Jack, 10
+            if (ranks.includes(10) || ranks.includes(11) || ranks.includes(12) || ranks.includes(13)){
+                let indexedRank = ranks.indexOf(1)
+                ranks[indexedRank] = 14;
+            }
+
+        // console.log(ranks);
+
+        let sortedranks = ranks.sort((a, b) => a - b); // Ref: https://www.w3schools.com/jsref/jsref_sort.asp
+        // console.log(sortedranks);
     
         for (let i = 0; i < sortedranks.length - 1; i++) {
             if (sortedranks[i] + 1 !== sortedranks[i + 1]) {
-                return false; // Not a straight flush
+                return false;
             }
         }
         return true; // It's a straight flush
@@ -453,10 +479,10 @@ button.addEventListener("click", () => {// fetching api's
     // 7. Three of a kind: Three cards of the same rank.
     let threeOfKind = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
@@ -498,10 +524,10 @@ button.addEventListener("click", () => {// fetching api's
     // 8. Two pair: Two different pairs.
     let twoPair = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
@@ -547,10 +573,10 @@ button.addEventListener("click", () => {// fetching api's
     // 9. Pair: Two cards of the same rank.
     let pair = (array) => {
         let suits = [];
-        let ranks = []
+        let ranks = [];
     
         for (let card of array) {
-            let rank = card.slice(0, -1)
+            let rank = card.slice(0, -1);
             let suit = card.slice(-1);
     
             if (rank === "0") {
@@ -596,10 +622,10 @@ button.addEventListener("click", () => {// fetching api's
     // 10. High Card: When you haven't made any of the hands above, the highest card plays. In the example below, the jack plays as the highest card.
 let highCard = (array) => {
     let suits = [];
-    let ranks = []
+    let ranks = [];
 
     for (let card of array) {
-        let rank = card.slice(0, -1)
+        let rank = card.slice(0, -1);
         let suit = card.slice(-1);
 
         if (rank === "0") {

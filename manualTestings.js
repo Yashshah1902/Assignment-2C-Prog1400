@@ -1,6 +1,8 @@
 // Manual Testing
 
 // Royal Flush
+let except2 = ["AD", "2S", "3H", "4C", "5D"];
+let except = ["AD", "KS", "QH", "JC", "0D"];
 let pairc = ["2D", "2S", "5H", "7C", "0D"];
 let twoPairc = ["2D", "2S", "5H", "4C", "4D"];
 let flushc = ["5S", "2S", "6S", "0S", "KS"];
@@ -308,16 +310,16 @@ console.log(flush(threeOfKindc));
 // 6. Straight: Five cards in a sequence, but not of the same suit.
 let straight = (array) => {
     let suits = [];
-    let ranks = []
+    let ranks = [];
 
     for (let card of array) {
-        let rank = card.slice(0, -1)
+        let rank = card.slice(0, -1);
         let suit = card.slice(-1);
 
         if (rank === "0") {
             rank = "10";
         } else if (rank === "A") {
-            rank = "14";
+            rank = "1";
         } else if (rank === "K") {
             rank = "13";
         } else if (rank === "Q") {
@@ -330,22 +332,31 @@ let straight = (array) => {
         suits.push(suit);
     }
 
-    console.log(suits);
     console.log(ranks);
 
-    let sortedranks = ranks.sort();
+        if (ranks.includes(10) || ranks.includes(11) || ranks.includes(12) || ranks.includes(13)){
+            let indexedRank = ranks.indexOf(1)
+            ranks[indexedRank] = 14;
+        }
+
+    console.log(ranks);
+
+    let sortedranks = ranks.sort((a, b) => a - b); // Ref: https://www.w3schools.com/jsref/jsref_sort.asp
     console.log(sortedranks);
 
     for (let i = 0; i < sortedranks.length - 1; i++) {
         if (sortedranks[i] + 1 !== sortedranks[i + 1]) {
-            return false; // Not a straight flush
+            return false;
         }
     }
-    return "Your highest hand is Straight"; // It's a straight flush
+    return true; // It's a straight flush
 }
 
 console.log(straight(codesArray));
 console.log(straight(threeOfKindc));
+console.log(straight(except));
+console.log(straight(except2));
+
 
 // 7. Three of a kind: Three cards of the same rank.
 let threeOfKind = (array) => {

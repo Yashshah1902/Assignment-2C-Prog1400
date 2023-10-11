@@ -52,6 +52,10 @@ body::after {
     font-family: 'Times New Roman', Times, serif;
 }
 
+#mainDiv h2{
+    text-align: center;
+}
+
 #answerDiv {
     background: bisque;
     margin-left: 500px;
